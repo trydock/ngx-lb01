@@ -1,0 +1,19 @@
+version: "3.2"
+
+services:
+  nginx:
+    container_name: pulsiot-dev-lb
+    image: trydock/ngx-lb:unstable
+    networks :
+      - local-devnet
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+      - "9000:9000"
+    volumes:
+      - ./code:/var/www/html
+      - ./nlb.conf:/etc/nginx/conf.d/default.conf
+networks:
+  local-devnet:
+    driver: bridge
